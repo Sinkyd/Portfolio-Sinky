@@ -1,39 +1,3 @@
-SELECT DATE_FORMAT(Date, 'yyyyMM') AS month_id,
-       COUNT(DISTINCT `Transaction ID`) AS transaction_count,
-       SUM(`Total Amount`) AS total_sales,
-       AVG(`Total Amount`) AS avg_sales,
-       `Product Category`,
-       CASE 
-           WHEN Age >= 1 AND Age < 13 THEN 'child'
-           WHEN Age >= 13 AND Age < 19 THEN 'teen'
-           WHEN Age >= 19 AND Age < 35 THEN 'adult'
-           ELSE 'senior'
-       END AS age_group,
-       CASE
-           WHEN `Total Amount` >= 10 AND `Total Amount` < 50 THEN 'low spend'
-           WHEN `Total Amount` >= 50 AND `Total Amount` < 100 THEN 'medium spend'
-           WHEN `Total Amount` >= 100 AND `Total Amount` < 200 THEN 'big spend'
-           WHEN `Total Amount` >= 200 THEN 'over spend'
-           ELSE 'spend_bucket'
-       END AS spend_bucket
-FROM workspace.default.retail_sales_dataset_1
-GROUP BY DATE_FORMAT(Date, 'yyyyMM'), `Product Category`, 
-         CASE 
-             WHEN Age >= 1 AND Age < 13 THEN 'child'
-             WHEN Age >= 13 AND Age < 19 THEN 'teen'
-             WHEN Age >= 19 AND Age < 35 THEN 'adult'
-             ELSE 'senior'
-         END,
-         CASE
-             WHEN `Total Amount` >= 10 AND `Total Amount` < 50 THEN 'low spend'
-             WHEN `Total Amount` >= 50 AND `Total Amount` < 100 THEN 'medium spend'
-             WHEN `Total Amount` >= 100 AND `Total Amount` < 200 THEN 'big spend'
-             WHEN `Total Amount` >= 200 THEN 'over spend'
-             ELSE 'spend_bucket'
-         END
-LIMIT 1000;
-
-
 # Portfolio-Sinky
 Sales dashboard 
 ## Sales Analysis Report
